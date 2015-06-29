@@ -17,7 +17,7 @@ namespace RIW
             private set
             {
                 if (value < 0) 
-                    this._topPosition = value; 
+                    this._topPosition = 0; 
                 else if (value < this._screenText.Count())
                 {
                     this._topPosition = value;
@@ -32,7 +32,7 @@ namespace RIW
             private set
             {
                 if (value < 0) 
-                    this._leftPosition = value;
+                    this._leftPosition = 0;
                 else if (value < this._screenText[TopPosition].Count())
                     this._leftPosition = value;
                 else if (value >= this._screenText[TopPosition].Count())
