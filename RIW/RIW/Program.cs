@@ -19,9 +19,12 @@ namespace RIW
         private static void doWork()
         {
             ScreenManipulator screenInfo = new ScreenManipulator();
+            ConsoleKeyInfo consoleKeyInfo;
+
             do
             {
-                screenInfo.getInput(Console.ReadKey(true));
+                consoleKeyInfo = Console.ReadKey(true);
+                screenInfo.getInput(consoleKeyInfo);
                 Console.Clear();
                 foreach (var i in screenInfo.ScreenText)
                     Console.WriteLine(i);
