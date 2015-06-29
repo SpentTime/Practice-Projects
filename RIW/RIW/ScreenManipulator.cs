@@ -86,6 +86,10 @@ namespace RIW
                 case ConsoleKey.Enter:
                     this.InsertNewLine();
                     break;
+                case ConsoleKey.Tab: //just adding four spaces for now.
+                    for (int i = 0; i < 4; i++)
+                        InsertChar(' ');
+                    break;
                 default:
                     if (keyInfo.KeyChar > 31 && keyInfo.KeyChar < 127)  // if c is a printable character
                         InsertChar(keyInfo.KeyChar);
