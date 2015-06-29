@@ -40,14 +40,6 @@ namespace RIW
             }
         }
 
-        private void AddToScreenText(char c)
-        {
-            if (c > 31 && c < 127)  // if c is a printable character
-                InsertChar(c);
-            else if (c == '\n')
-                InsertNewLine();
-        }
-
         private void InsertChar(char c)
         {
             if (this.LeftPosition < this._screenText[this.TopPosition].Count()) // if cursor is not at end of line, insert character
@@ -92,10 +84,11 @@ namespace RIW
                     this.LeftPosition++;
                     break;
                 case ConsoleKey.Enter:
-                    this.AddToScreenText('\n');
+                    this.InsertNewLine();
                     break;
                 default:
-                    this.AddToScreenText(keyInfo.KeyChar);
+                    if (keyInfo.KeyChar > 31 && keyInfo.KeyChar < 127)  // if c is a printable character
+                        InsertChar(keyInfo.KeyChar);
                     break;
             }
         }
