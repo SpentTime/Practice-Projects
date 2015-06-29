@@ -1,0 +1,99 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RIW
+{
+    class ScreenInfo
+    {
+        public List<string> _screenText; //make this private again!!!
+        private int _topPosition, _leftPosition;
+        private List<int> _maxLeftPerLine;
+
+        public ScreenInfo()
+        {
+            this._screenText = new List<string>();
+            this._screenText.Add("");
+            this._topPosition = 0;
+            this._leftPosition = 0;
+            this._maxLeftPerLine = new List<int> { 0 };
+        }
+
+        int TopPosition
+        {
+            get { return _topPosition; }
+            set
+            {
+                this._topPosition += value;
+                if (this._topPosition < 0)
+                    this._topPosition = 0;
+                else if (this._topPosition >= this._maxLeftPerLine.Count())
+                    this._topPosition = this._maxLeftPerLine.Count() -1 ;
+            }
+        }
+
+        int LeftPosition
+        {
+            get { return _leftPosition; }
+            set
+            {
+                this._leftPosition += value;
+                if (this._leftPosition < 0)
+                    this._leftPosition = 0;
+            }
+        }
+
+        private void AddText(string input)
+        {
+            this._screenText[this._topPosition] =
+                    this._screenText[this._topPosition].Insert(this._leftPosition, input);
+            this._leftMax++;
+            this._leftPosition++;
+        }
+
+        string ScreenText
+        {
+            set
+            {
+                if (value == "\n")
+                {
+                    AddText(value);
+                    this._screenText.Add("");
+                    this._topMax++;
+                    this._topPosition++;
+                    this._leftPosition = 0;
+
+                }
+                else
+                    AddText(value);
+            }
+        }
+
+        public void getInput(ConsoleKeyInfo keyInfo)
+        {
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    this.TopPosition--;
+                    break;
+                case ConsoleKey.DownArrow:
+                    this.TopPosition--;
+                    break;
+                case ConsoleKey.LeftArrow:
+                    this.LeftPosition--;
+                    break;
+                case ConsoleKey.RightArrow:
+                    this.LeftPosition--;
+                    break;
+                case ConsoleKey.Enter:
+                    this.ScreenText = "\n";
+                    break;
+                default:
+                    this.ScreenText = keyInfo.KeyChar.ToString();
+                    break;
+            }
+        }
+    }
+}
